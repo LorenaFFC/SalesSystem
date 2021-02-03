@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 @Entity
@@ -31,7 +33,8 @@ public class Servico {
 	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
 
-	@Column(name = "data_cadastro")
+	@Column(name = "data_cadastro", updatable=false)
+	@JsonFormat(pattern ="dd/MM/yyyy")
 	private LocalDate dataCadastro;
 
 	
