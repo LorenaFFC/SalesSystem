@@ -1,9 +1,12 @@
 package com.github.lorenaffc.SalesSystem.rest;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,18 +43,26 @@ public class ClienteController {
 	}
 
 	@PostMapping
+	@CrossOrigin(origins = "http://localhost:4200")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Cliente salvar(@RequestBody @Valid Cliente cliente) {
 		return clienteRepository.save(cliente);
 
 	}
 	
+	@GetMapping
+	@CrossOrigin(origins = "http://localhost:4200")
+	public List<Cliente> ListClienteFull(){
+		return clienteRepository.findAll();
+	}
 	@GetMapping("{id}")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public Cliente buscarCliente( @PathVariable Integer id) {
 		return clienteRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "The customer id does not exist in the database."));
 	}
 	
 	@DeleteMapping("{id}")
+	@CrossOrigin(origins = "http://localhost:4200")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deletar( @PathVariable Integer id) {
 		clienteRepository
@@ -65,6 +76,7 @@ public class ClienteController {
 	
 
 	@PutMapping("{id}")
+	@CrossOrigin(origins = "http://localhost:4200")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void alterCliente(@PathVariable Integer id, @RequestBody Cliente clienteAtualizado) {
 		clienteRepository
