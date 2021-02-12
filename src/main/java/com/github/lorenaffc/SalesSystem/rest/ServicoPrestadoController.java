@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,6 +56,13 @@ public class ServicoPrestadoController  {
         return repository.save(servicoPrestado);
     }
 
-    
+    @GetMapping
+    @CrossOrigin(origins = "http://localhost:4200")
+    public List<ServicoPrestado> pesquisar(   
+            @RequestParam(value = "nome", required = false, defaultValue = "") String nome,
+            @RequestParam(value = "mes", required = false) Integer mes
+    ) {
+        return repository.findByNomeClienteAndMes("%" + nome + "%", mes);
+    }
  
 }
