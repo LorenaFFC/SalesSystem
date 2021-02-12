@@ -1,18 +1,17 @@
 package com.github.lorenaffc.SalesSystem.rest;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
+import java.util.List;
 import javax.validation.Valid;
-
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-
 import com.github.lorenaffc.SalesSystem.model.entity.Cliente;
 import com.github.lorenaffc.SalesSystem.model.entity.ServicoPrestado;
 import com.github.lorenaffc.SalesSystem.model.repository.ClienteRepository;
@@ -33,6 +32,7 @@ public class ServicoPrestadoController  {
     private final BigDecimalConverter bigDecimalConverter;
 
     @PostMapping
+    @CrossOrigin(origins = "http://localhost:4200")
     @ResponseStatus(HttpStatus.CREATED)
     public ServicoPrestado salvar( @RequestBody @Valid ServicoPrestadoDTO dto ){
    //     LocalDate data = LocalDate.parse(dto.getDataCadastro(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -55,5 +55,6 @@ public class ServicoPrestadoController  {
         return repository.save(servicoPrestado);
     }
 
-
+    
+ 
 }
